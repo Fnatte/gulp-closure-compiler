@@ -69,7 +69,9 @@ module.exports = function(opt, execFile_opt) {
     // Enable custom max buffer to fix "stderr maxBuffer exceeded" error. Default is 200*1024.
     var jar = execFile('java', args, { maxBuffer: opt.maxBuffer*1024 }, function(error, stdout, stderr) {
       if (error || stderr) {
-        this.emit('error', new gutil.PluginError(PLUGIN_NAME, error || stderr));
+        // this.emit('error', new gutil.PluginError(PLUGIN_NAME, error || stderr));
+        gutil.log("Closure compiler error:\n" + (error || stderr));
+        gutil.beep();
         return;
       }
 
